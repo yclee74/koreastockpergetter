@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup as BS
 
 class KoreanStockPERSnatcher:
     def __init__(self):
-        self.data = {}
 
         date = datetime.datetime.today()
         self.date = date.strftime("%Y%m%d")
@@ -27,7 +26,7 @@ class KoreanStockPERSnatcher:
         else:
             per = "NA"
 
-        self.data[ticker] = {
+        return {
             "ticker": ticker,
             "ind_stock": ind_stock,
             "date": self.date,

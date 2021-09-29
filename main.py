@@ -1,7 +1,6 @@
 import csv
 
 from tqdm import tqdm
-import pandas as pd
 
 from kstock_per_getter import KoreanStockPERSnatcher
 
@@ -10,9 +9,10 @@ if __name__ == "__main__":
     reader = csv.reader(file)
 
     per_collection = KoreanStockPERSnatcher()
-    for stock in tqdm(list(reader)):
-        ticker = stock[0]
-        per_collection.get_per(ticker)
 
-    df = pd.DataFrame(per_collection.data)
-    df.T.to_csv("result.csv")
+    with open("result.csv", "w") as res_file:
+        writer = csv.writer(res_file)
+        for stock in tqdm(list(reader)):
+            ticker = stock[0]
+            data = per_collection.get_per(ticker)
+            writer.writerows([list(data.values())])
